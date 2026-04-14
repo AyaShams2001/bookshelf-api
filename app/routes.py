@@ -1,13 +1,14 @@
 from fastapi import APIRouter, HTTPException
-from typing import Optional
-from models import Book
-from database_sql import SessionLocal
-from models_sql import BookTable
+from typing import Optional, List
+from .database_sql import SessionLocal
+from .db_models import BookTable
 from sqlalchemy import func
+from .schemas import Book, BookResponse , BooksListResponse , BookStatsResponse, MessageResponse
 
 router = APIRouter()
 
-@router.get("/books")
+
+@router.get("/books", response_model=BooksListResponse)
 def get_books(skip: int = 0, limit: int = 10):
     db = SessionLocal()
 
@@ -30,7 +31,7 @@ def get_books(skip: int = 0, limit: int = 10):
         ]
     }
 
-@router.post("/books")
+@router.post("/books", response_model=BookResponse)
 def add_book(book: Book):
     db = SessionLocal()
 
@@ -54,7 +55,7 @@ def add_book(book: Book):
         "rating": new_book.rating
     }
 
-@router.get("/books/search")
+@router.get("/books/search", response_model=List[BookResponse])
 def search_books(author: str):
     db = SessionLocal()
 
@@ -73,7 +74,7 @@ def search_books(author: str):
         for book in books
     ]
 
-@router.get("/books/title-search")
+@router.get("/books/title-search", response_model=List[BookResponse])
 def search_books_by_title(title: str):
     db = SessionLocal()
 
@@ -92,7 +93,7 @@ def search_books_by_title(title: str):
         for book in books
     ]
 
-@router.get("/books/filter")
+@router.get("/books/filter", response_model=List[BookResponse])
 def filter_books(title: str = "", author: str = ""):
     db = SessionLocal()
 
@@ -118,22 +119,22 @@ def filter_books(title: str = "", author: str = ""):
         for book in books
     ]
 
-@router.get("/books/sort")
+@router.get("/books/sort", response_model=List[BookResponse])
 def sort_books(by: str = "title", order: str = "asc"):
     db = SessionLocal()
 
     if by == "title":
-        query = db.query(BookTable).order_by(BookTable.title)
+        sort_column = BookTable.title
     elif by == "year":
-        query = db.query(BookTable).order_by(BookTable.year)
+        sort_column = BookTable.year
     else:
         db.close()
-        return {"error": "Invalid sort field"}
+        raise HTTPException(status_code=400, detail="Invalid sort field")
 
     if order == "desc":
-        query = query.order_by(BookTable.title.desc() if by == "title" else BookTable.year.desc())
-
-    books = query.all()
+        books = db.query(BookTable).order_by(sort_column.desc()).all()
+    else:
+        books = db.query(BookTable).order_by(sort_column).all()
 
     db.close()
 
@@ -148,7 +149,7 @@ def sort_books(by: str = "title", order: str = "asc"):
         for book in books
     ]
 
-@router.get("/books/top-rated")
+@router.get("/books/top-rated", response_model=List[BookResponse])
 def get_top_rated_books(min_rating: float = 4.5):
     db = SessionLocal()
 
@@ -167,7 +168,7 @@ def get_top_rated_books(min_rating: float = 4.5):
         for book in books
     ]
 
-@router.get("/books/stats")
+@router.get("/books/stats", response_model=BookStatsResponse)
 def get_book_stats():
     db = SessionLocal()
 
@@ -189,7 +190,7 @@ def get_book_stats():
 
 
 
-@router.get("/books/recent")
+@router.get("/books/recent", response_model=BooksListResponse)
 def get_recent_books(
     year: Optional[int] = None,
     min_rating: Optional[float] = None,
@@ -233,7 +234,7 @@ def get_recent_books(
     }
 
 
-@router.get("/books/{book_id}")
+@router.get("/books/{book_id}", response_model=BookResponse)
 def get_book(book_id: int):
     db = SessionLocal()
 
@@ -252,7 +253,7 @@ def get_book(book_id: int):
         "rating": book.rating
     }
 
-@router.put("/books/{book_id}")
+@router.put("/books/{book_id}", response_model=BookResponse)
 def update_book(book_id: int, updated_book: Book):
     db = SessionLocal()
 
@@ -280,7 +281,7 @@ def update_book(book_id: int, updated_book: Book):
     }
 
 
-@router.delete("/books/{book_id}")
+@router.delete("/books/{book_id}", response_model=MessageResponse)
 def delete_book(book_id: int):
     db = SessionLocal()
 
