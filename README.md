@@ -40,18 +40,23 @@ Then open:
 http://127.0.0.1:8000/docs
 
 
-## 🚀 Endpoint Examples
+## Endpoint Examples
 
 Get all books
 GET /books
+
 Search by author
 GET /books/search?author=james
+
 Filter books
 GET /books/filter?title=atomic&author=james
+
 Sort books
 GET /books/sort?by=year&order=desc
+
 Recent books
 GET /books/recent?year=2010&min_rating=4
+
 Book stats
 GET /books/stats
 
