@@ -40,7 +40,8 @@ Then open:
 http://127.0.0.1:8000/docs
 
 
-## Example Endpoints
+## 🚀 Endpoint Examples
+
 Get all books
 GET /books
 Search by author
