@@ -1,37 +1,57 @@
 # Bookshelf API
 
-A FastAPI backend application for managing books, built with PostgreSQL and deployed on Render.
+A FastAPI backend application for managing books, powered by PostgreSQL and deployed on Render.
 
-2. Live links 
+This project demonstrates backend fundamentals including REST API design, database integration with SQLAlchemy, and cloud deployment.
+
+---
+
 ## Live API
 
-Base URL:  
+**Base URL**  
 https://bookshelf-api-jd9k.onrender.com/
 
-API Docs (Swagger):  
+**API Docs (Swagger UI)**  
 https://bookshelf-api-jd9k.onrender.com/docs
-3. Features
+
+---
+
 ## Features
 
-- Add books
-- View all books
-- Search books
-- Filter books
-- Persistent storage with PostgreSQL
+- Create, read, update, and delete books
+- Search and filter functionality
+- Persistent storage using PostgreSQL
 - RESTful API built with FastAPI
-- Deployed on Render
-4. Tech stack
+- Deployed and hosted on Render
+
+---
+
 ## Tech Stack
 
 - Python
 - FastAPI
 - SQLAlchemy
 - PostgreSQL
-- Render (deployment)
-5. Example request (this is powerful)
+- Uvicorn
+- Render
+
+---
+
+## API Endpoints
+
+| Method | Endpoint           | Description            |
+|--------|-------------------|------------------------|
+| GET    | /books            | Get all books          |
+| POST   | /books            | Create a new book      |
+| GET    | /books/{id}       | Get a book by ID       |
+| PUT    | /books/{id}       | Update a book          |
+| DELETE | /books/{id}       | Delete a book          |
+
+---
+
 ## Example Request
 
-POST /books
+**POST /books**
 
 ```json
 {
@@ -41,27 +61,38 @@ POST /books
   "rating": 4.5
 }
 
----
 
-## 6. Run locally
 
-```md
-## Run Locally
+How to Use the API
+1-Open the Swagger documentation:
+https://bookshelf-api-jd9k.onrender.com/docs
+2-Use POST /books to add a new book
+3-Use GET /books to retrieve all books
+4-Use other endpoints to update or delete books
 
-```bash
+
+Run Locally
 git clone https://github.com/AyaShams2001/bookshelf-api.git
 cd bookshelf-api
 
 pip install -r requirements.txt
 uvicorn app.main:app --reload
 
----
 
 
-## What I Learned
 
-- Building REST APIs with FastAPI
-- Structuring backend projects
-- Using SQLAlchemy with PostgreSQL
-- Deploying applications on Render
-- Handling environment variables and database connections
+Project Structure
+app/
+├── main.py        # Application entry point
+├── routes.py      # API route definitions
+├── models.py      # Database models
+├── database.py    # Database connection setup
+
+
+
+What I Learned
+Building REST APIs with FastAPI
+Structuring backend applications
+Integrating PostgreSQL using SQLAlchemy
+Managing environment variables
+Deploying applications on Render
