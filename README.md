@@ -1,5 +1,4 @@
 
-````md
 # Bookshelf API
 
 A FastAPI backend application for managing books, powered by PostgreSQL and deployed on Render.
