@@ -8,6 +8,9 @@ Base.metadata.create_all(bind=engine)
 
 @app.get("/")
 def read_root():
-    return {"message": "Bookshelf API"}
+    return {
+        "message": "Welcome to Bookshelf API",
+        "docs": "/docs"
+    }
 
 app.include_router(router)
