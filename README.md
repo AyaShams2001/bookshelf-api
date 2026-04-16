@@ -1,6 +1,3 @@
-Your content is good, but it’s missing **Markdown formatting**, so GitHub shows it as plain text instead of structured sections.
-
-Copy this **exact version** — it will render cleanly on GitHub:
 
 ````md
 # Bookshelf API
