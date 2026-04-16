@@ -2,7 +2,7 @@
 from fastapi import FastAPI
 from .routes import router
 from .db_models import BookTable
-from .database import engine, Base
+from .database import engine, Base, SessionLocal
 
 app = FastAPI()
 
