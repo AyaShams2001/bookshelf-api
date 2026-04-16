@@ -1,64 +1,67 @@
 # Bookshelf API
 
-A backend API built with FastAPI for managing a collection of books.
+A FastAPI backend application for managing books, built with PostgreSQL and deployed on Render.
 
+2. Live links 
+## Live API
+
+Base URL:  
+https://bookshelf-api-jd9k.onrender.com/
+
+API Docs (Swagger):  
+https://bookshelf-api-jd9k.onrender.com/docs
+3. Features
 ## Features
 
-- Add, update, delete books
-- Search books by author or title
-- Filter books by title and/or author
-- Sort books by title or year
-- Get top-rated books
-- Get recent books with filtering, sorting, and pagination
-- View overall book statistics (total + average rating)
-
+- Add books
+- View all books
+- Search books
+- Filter books
+- Persistent storage with PostgreSQL
+- RESTful API built with FastAPI
+- Deployed on Render
+4. Tech stack
 ## Tech Stack
 
 - Python
 - FastAPI
 - SQLAlchemy
-- SQLite
+- PostgreSQL
+- Render (deployment)
+5. Example request (this is powerful)
+## Example Request
 
-## Project Structure
+POST /books
 
+```json
+{
+  "title": "Atomic Habits",
+  "author": "James Clear",
+  "year": 2018,
+  "rating": 4.5
+}
 
-app/
-main.py # app entry point
-routes.py # API endpoints
-crud.py # database logic
-db_models.py # SQLAlchemy models
-schemas.py # Pydantic schemas
+---
 
+## 6. Run locally
 
-##  Run Locally
+```md
+## Run Locally
 
 ```bash
+git clone https://github.com/AyaShams2001/bookshelf-api.git
+cd bookshelf-api
+
+pip install -r requirements.txt
 uvicorn app.main:app --reload
 
-Then open:
-
-http://127.0.0.1:8000/docs
+---
 
 
-## Endpoint Examples
+## What I Learned
 
-Get all books
-GET /books
-
-Search by author
-GET /books/search?author=james
-
-Filter books
-GET /books/filter?title=atomic&author=james
-
-Sort books
-GET /books/sort?by=year&order=desc
-
-Recent books
-GET /books/recent?year=2010&min_rating=4
-
-Book stats
-GET /books/stats
-
-
-
+- Building REST APIs with FastAPI
+- Structuring backend projects
+- Using SQLAlchemy with PostgreSQL
+- Deploying applications on Render
+- Handling environment variables and database connections
