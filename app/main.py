@@ -9,7 +9,7 @@ Base.metadata.create_all(bind=engine)
 @app.get("/")
 def read_root():
     return {
-        "message": "Welcome to Bookshelf API",
+        "message": "Welcome to Bookshelf API!",
         "docs": "/docs"
     }
 
