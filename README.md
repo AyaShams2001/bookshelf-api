@@ -2,11 +2,11 @@
 
 A FastAPI backend application for managing books, powered by PostgreSQL and deployed on Render.
 
-This project demonstrates backend fundamentals including REST API design, database integration with SQLAlchemy, containerization with Docker, and multi-service architecture using Docker Compose.
+Built and deployed a containerized FastAPI backend with PostgreSQL. Implemented CI/CD pipeline using GitHub Actions to build and push Docker images to Docker Hub, with automated deployment on Render.
 
 ---
 
-## 🌐 Live API
+## Live API
 
 **Base URL**
 https://bookshelf-api-jd9k.onrender.com/
@@ -16,7 +16,7 @@ https://bookshelf-api-jd9k.onrender.com/docs
 
 ---
 
-## 🚀 Run with Docker (Recommended)
+## Run with Docker (Recommended)
 
 This project uses Docker Compose to run both the API and PostgreSQL database.
 
@@ -41,7 +41,7 @@ http://localhost:8000/docs
 
 ---
 
-## 🧱 Architecture
+## Architecture
 
 * **API Service** → FastAPI application
 * **Database Service** → PostgreSQL container
@@ -50,7 +50,7 @@ http://localhost:8000/docs
 
 ---
 
-## ⚙️ Environment Configuration
+## Environment Configuration
 
 The API uses the following environment variable inside Docker:
 
@@ -63,7 +63,7 @@ DATABASE_URL=postgresql://postgres:postgres@db:5432/bookshelf_db
 
 ---
 
-## 🐳 Services
+## Services
 
 Defined in `docker-compose.yml`:
 
@@ -72,7 +72,7 @@ Defined in `docker-compose.yml`:
 
 ---
 
-## 🛑 Stop the application
+## Stop the application
 
 ```bash
 docker compose down
@@ -91,7 +91,7 @@ docker compose down
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 * Python
 * FastAPI
@@ -99,11 +99,13 @@ docker compose down
 * PostgreSQL
 * Uvicorn
 * Docker & Docker Compose
+* GitHub Actions (CI/CD)
+* Docker Hub
 * Render
 
 ---
 
-## 📌 API Endpoints
+## API Endpoints
 
 | Method | Endpoint    | Description       |
 | ------ | ----------- | ----------------- |
@@ -115,7 +117,7 @@ docker compose down
 
 ---
 
-## 📦 Example Request
+## Example Request
 
 **POST /books**
 
@@ -130,19 +132,30 @@ docker compose down
 
 ---
 
-## 🧪 Run Locally (Without Docker)
+## Run Locally (Without Docker)
 
 ```bash
 git clone https://github.com/AyaShams2001/bookshelf-api.git
 cd bookshelf-api
 
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\Activate.ps1
+
 pip install -r requirements.txt
 uvicorn app.main:app --reload
+
 ```
+
 
 ---
 
-## 📁 Project Structure
+## CI/CD Pipeline
+
+* Code pushed to GitHub triggers GitHub Actions
+* Docker image is built and pushed to Docker Hub
+* Render automatically redeploys using the updated image
+
+## Project Structure
 
 ```
 app/
@@ -155,14 +168,3 @@ app/
 ```
 
 ---
-
-## 📚 What I Learned
-
-* Building REST APIs with FastAPI
-* Structuring backend applications
-* Integrating PostgreSQL using SQLAlchemy
-* Managing environment-based configuration
-* Containerizing applications with Docker
-* Running multi-service systems with Docker Compose
-* Handling service dependencies and startup order
-* Deploying backend services on Render
