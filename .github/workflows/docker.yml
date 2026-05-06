@@ -24,3 +24,9 @@ jobs:
           context: .
           push: true
           tags: ayazker/bookshelf-api:latest
+
+
+      - name: Trigger Render deploy
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
+
+
